@@ -130,7 +130,10 @@ TESTOBJS	:= $(patsubst $(TESTDIR)/%,$(TESTBUILD)/%,$(TESTS:.$(SRCEXT)=.$(OBJEXT)
 TESTCOVS	:= $(patsubst $(TESTDIR)/%,$(TESTBUILD)/%,$(TESTS:.$(SRCEXT)=.$(SRCEXT).$(COVEXT)))
 
 units: testout $(TESTOBJS)
-	$(CC) $(TESTINC) ./$(TESTBUILD)/bimbo.o ./$(SRCDIR)/articles.c -o ./$(TESTTARGET)/bimbo $(TESTLIBS)
+	$(CC) $(TESTINC) ./$(TESTBUILD)/gray.o -o ./$(TESTTARGET)/gray $(TESTLIBS)
+	$(CC) $(TESTINC) ./$(TESTBUILD)/rgb2hsv.o -o ./$(TESTTARGET)/rgb2hsv $(TESTLIBS)
+	$(CC) $(TESTINC) ./$(TESTBUILD)/shift.o -o ./$(TESTTARGET)/shift $(TESTLIBS)
+	$(CC) $(TESTINC) ./$(TESTBUILD)/clamp.o -o ./$(TESTTARGET)/clamp $(TESTLIBS)
 
 testout:
 	@mkdir -p ./$(TESTTARGET)
