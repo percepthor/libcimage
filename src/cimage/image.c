@@ -239,7 +239,7 @@ void image_shift (Image *im, int c, float v) {
 void image_clamp (Image *im) {
 
 	unsigned int stop = im->w * im->h * im->c;
-	for (int x = 0; x < stop; x++) {
+	for (unsigned int x = 0; x < stop; x++) {
 		if (im->data[x] > 1) im->data[x] = 1;
 		else if (im->data[x] < 0)
 			im->data[x] = 0;
@@ -265,7 +265,7 @@ void image_rgb_to_hsv (Image *im) {
 
 				v = max;
 
-				if (max == 0) {
+				if (max <= 0) {
 					s = 0;
 					h = 0;
 				}
@@ -273,8 +273,8 @@ void image_rgb_to_hsv (Image *im) {
 				else {
 					s = delta / max;
 
-					if (r == max) h = (g - b) / delta;
-					else if (g == max) h = 2 + (b - r) / delta;
+					if (r >= max) h = (g - b) / delta;
+					else if (g >= max) h = 2 + (b - r) / delta;
 					else h = 4 + (r - g) / delta;
 
 					if (h < 0) h += 6;
